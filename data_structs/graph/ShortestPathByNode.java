@@ -3,10 +3,10 @@ import java.util.HashMap;
 public class ShortestPathByNode <T>{
 
 
-    private Node<T> n;
+    private final Node<T> n;
 
-    private HashMap<Node<T>, Double> dist;
-    private HashMap<Node<T>, Node<T>> prev;
+    private final HashMap<Node<T>, Double> dist;
+    private final HashMap<Node<T>, Node<T>> prev;
 
 
     ShortestPathByNode(Node<T> n){

@@ -11,7 +11,6 @@ public class Main {
         g.connect("Mestre", "Catanzaro", false, 4);
 
 
-
         /*g.connect("Torino", "Milano", true, 1);
         g.connect("Bologna", "Oriago", true, 2);
         g.connect("Mestre", "Milano", true, 2);

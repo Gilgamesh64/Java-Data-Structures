@@ -14,11 +14,11 @@ public class Graph <T>{
         Node<T> v1 = getNode(vertex1), v2 = getNode(vertex2);
         
         if(v1 == null){
-            v1 = new Node<T>(vertex1);
+            v1 = new Node<>(vertex1);
             nodes.add(v1);
         } 
         if(v2 == null){
-            v2 = new Node<T>(vertex2);
+            v2 = new Node<>(vertex2);
             nodes.add(v2);
         } 
 
@@ -31,8 +31,7 @@ public class Graph <T>{
 
     /**returns true if the graph is fully connected */
     public boolean isFullyConnected(){
-        if(edges.size() < nodes.size()*(nodes.size()-1)) return false;
-        return true;
+        return edges.size() >= nodes.size()*(nodes.size()-1);
     }
 
     /**returns the node corrisponding to vertex */
@@ -46,6 +45,7 @@ public class Graph <T>{
     }
 
     /**returns a flat representation of the graph */
+    @Override
     public String toString(){
         String s = "";
         for (Node<T> n : nodes) {
@@ -124,7 +124,7 @@ public class Graph <T>{
     public ShortestPathByNode<T> Dijkstra(T data){
         Node<T> source = getNode(data);
         if(source == null) return null;
-        double alt = 0d;
+        double alt;
         shortestPathByNode = new ShortestPathByNode<>(source);
         ArrayList<Node<T>> q = new ArrayList<>();
         for (Node<T> vertex : nodes) {
@@ -134,7 +134,7 @@ public class Graph <T>{
         }
         shortestPathByNode.getDist().put(source, 0d);
         
-        while(q.size() != 0){
+        while(!q.isEmpty()){
             Node<T> u = minDist(q);
             q.remove(u);
             for (Edge<T> n : edgesExitingBy(u)) {
@@ -160,10 +160,8 @@ public class Graph <T>{
         if(source == null) return null;
 
         shortestPathByNode = new ShortestPathByNode<>(source);
-        ArrayList<Node<T>> q = new ArrayList<>();
         for (Node<T> vertex : nodes) {
             shortestPathByNode.getDist().put(vertex, Double.MAX_VALUE);
-            q.add(vertex);
         }
         shortestPathByNode.getDist().put(source, 0d);
         for (int i = 1; i < nodes.size(); i++) {
@@ -209,14 +207,14 @@ public class Graph <T>{
         return node;
     }
     public ArrayList<Edge<T>> kruskal(){
-        HashMap<Node<T>, ArrayList<Node<T>>> hm = new HashMap<Node<T>, ArrayList<Node<T>>>();
+        var hm = new HashMap<Node<T>, ArrayList<Node<T>>>();
         ArrayList<Edge<T>> result = new ArrayList<>(); 
         
         ArrayList<Edge<T>> sortedEdges = new ArrayList<>(); 
         for (Edge<T> edge : edges) {
             sortedEdges.add(new Edge<>(edge.getNode1(), edge.getNode2(), edge.getValue()));
         }
-        Collections.sort(sortedEdges, (b, a) -> new Double(b.getValue()).compareTo(a.getValue()));
+        Collections.sort(sortedEdges, (b, a) -> Double.valueOf(b.getValue()).compareTo(a.getValue()));
 
 
         for (Node<T> n : nodes) {
