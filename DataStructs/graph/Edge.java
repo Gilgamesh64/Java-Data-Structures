@@ -22,8 +22,4 @@ public class Edge <T>{
         public double getValue() {
             return value;
         }
-        public Object[] split(String string) {
-            // TODO Auto-generated method stub
-            throw new UnsupportedOperationException("Unimplemented method 'split'");
-        }
     }
